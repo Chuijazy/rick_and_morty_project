@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/characters_list_screen.dart';
+import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/custom_bottom_navigator_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,7 +12,9 @@ class HomeScreen extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CharactersListScreen()),
+            MaterialPageRoute(
+              builder: (context) => const CustomBottomNavigatorBar(),
+            ),
           );
         },
         child: Stack(

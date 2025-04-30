@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_project/modules/data/repository/characters_list_repository.dart';
 import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/characters_main_screens_details/custom_bottom_navigator_bar.dart';
+import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/custom_bottom_navigator_bar.dart';
 import 'package:rick_and_morty_project/modules/presentation/screens/filters_screen.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/characters_main_screens_details/characters_list_view.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/characters_main_screens_details/search_app_bar.dart';
+import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/characters_list_view.dart';
+import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/search_app_bar.dart';
 
 class CharactersListScreen extends StatefulWidget {
   const CharactersListScreen({super.key});
@@ -139,7 +139,6 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
                   scrollController: _scrollController,
                 ),
       ),
-      bottomNavigationBar: const CustomBottomNavigatorBar(),
     );
   }
 

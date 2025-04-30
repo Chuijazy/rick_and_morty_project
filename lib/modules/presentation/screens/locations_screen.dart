@@ -5,6 +5,9 @@ class LocationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('data'));
+    return Scaffold(
+      appBar: AppBar(title: const Text("Locations")),
+      body: const Center(child: Text("Locations screen")),
+    );
   }
 }
