@@ -1,0 +1,1 @@
+ /Users/cujzazyabdyldaeva/Documents/GitHub/rick_and_morty_project/.dart_tool/flutter_build/790b9edf3d0378d968c80ceff340af9f/native_assets.json: 
