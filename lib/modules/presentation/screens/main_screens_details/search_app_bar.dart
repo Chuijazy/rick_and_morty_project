@@ -9,24 +9,39 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xffF2F2F2),
+      backgroundColor: Colors.white,
       automaticallyImplyLeading: false,
-      title: TextField(
-        controller: controller,
-        style: const TextStyle(color: Colors.black),
-        decoration: const InputDecoration(
-          hintText: 'Search character...',
-          hintStyle: TextStyle(color: Color(0xffBDBDBD)),
-          border: InputBorder.none,
-          icon: Icon(Icons.search, color: Color(0xff5B6975)),
+      title: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        decoration: BoxDecoration(
+          color: const Color(0xffF2F2F2),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.search, color: Color(0xff5B6975)), // Иконка поиска
+            SizedBox(width: 8), // Отступ между иконкой и текстом
+            Expanded(
+              child: TextField(
+                controller: controller,
+                style: const TextStyle(color: Colors.black),
+                decoration: const InputDecoration(
+                  hintText: 'Search character...',
+                  hintStyle: TextStyle(color: Color(0xffBDBDBD)),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.filter_alt_outlined,
+                color: Color(0xff5B6975),
+              ),
+              onPressed: onFilterTap,
+            ),
+          ],
         ),
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.filter_list, color: Color(0xff5B6975)),
-          onPressed: onFilterTap,
-        ),
-      ],
     );
   }
 
