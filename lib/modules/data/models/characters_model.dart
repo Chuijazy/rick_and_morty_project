@@ -8,6 +8,8 @@ class CharactersModel extends CharactersEntity {
     required super.status,
     required super.species,
     required super.gender,
+    required super.originName,
+    required super.locationName,
     super.type,
   });
 
@@ -19,6 +21,8 @@ class CharactersModel extends CharactersEntity {
       status: json['status'] ?? '',
       species: json['species'] ?? '',
       gender: json['gender'] ?? '',
+      originName: json['origin']['name'] ?? '',
+      locationName: json['location']['name'] ?? '',
       type: json['type'] ?? '',
     );
   }
