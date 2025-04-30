@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         title: 'Rick and Morty',
         theme: lightTheme,
         darkTheme: darkTheme,
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         home: const HomeScreen(),
       ),
     );
