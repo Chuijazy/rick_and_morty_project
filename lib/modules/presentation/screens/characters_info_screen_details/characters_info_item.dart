@@ -24,10 +24,10 @@ class CharactersInfoItem extends StatelessWidget {
                 ),
                 Text(
                   character.gender,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff0B1E2D),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
@@ -44,10 +44,10 @@ class CharactersInfoItem extends StatelessWidget {
                 ),
                 Text(
                   character.species,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff0B1E2D),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
@@ -71,10 +71,10 @@ class CharactersInfoItem extends StatelessWidget {
                 ),
                 Text(
                   character.originName,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff0B1E2D),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
@@ -99,10 +99,10 @@ class CharactersInfoItem extends StatelessWidget {
                 ),
                 Text(
                   character.locationName,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff0B1E2D),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],

@@ -9,22 +9,25 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       automaticallyImplyLeading: false,
       title: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         decoration: BoxDecoration(
-          color: const Color(0xffF2F2F2),
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
           children: [
-            Icon(Icons.search, color: Color(0xff5B6975)), // Иконка поиска
-            SizedBox(width: 8), // Отступ между иконкой и текстом
+            Icon(Icons.search, color: Color(0xff5B6975)),
+            SizedBox(width: 8),
             Expanded(
               child: TextField(
                 controller: controller,
-                style: const TextStyle(color: Colors.black),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
+
                 decoration: const InputDecoration(
                   hintText: 'Search character...',
                   hintStyle: TextStyle(color: Color(0xffBDBDBD)),

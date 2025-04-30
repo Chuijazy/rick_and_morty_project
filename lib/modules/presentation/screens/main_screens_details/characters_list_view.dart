@@ -107,8 +107,8 @@ class CharactersListView extends StatelessWidget {
             children: [
               Text(
                 character.name,
-                style: const TextStyle(
-                  color: Colors.black,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),

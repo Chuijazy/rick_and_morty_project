@@ -19,7 +19,7 @@ class CharactersInfoScreen extends StatelessWidget {
             : Colors.red;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -57,7 +57,11 @@ class CharactersInfoScreen extends StatelessWidget {
                             width: 150,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 5),
+                              border: Border.all(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                width: 5,
+                              ),
                               image: DecorationImage(
                                 image: NetworkImage(character.image),
                                 fit: BoxFit.cover,
@@ -81,8 +85,8 @@ class CharactersInfoScreen extends StatelessWidget {
                             Text(
                               character.name,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.black,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 28,
                                 fontWeight: FontWeight.w600,
                               ),
