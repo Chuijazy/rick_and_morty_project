@@ -5,11 +5,15 @@ import 'package:rick_and_morty_project/modules/presentation/screens/characters_i
 class CharactersListView extends StatelessWidget {
   final List<CharactersEntity> characters;
   final String searchQuery;
+  final bool isLoading;
+  final ScrollController scrollController;
 
   const CharactersListView({
     super.key,
     required this.characters,
     required this.searchQuery,
+    required this.isLoading,
+    required this.scrollController,
   });
 
   @override
@@ -35,7 +39,8 @@ class CharactersListView extends StatelessWidget {
     }
 
     return ListView.builder(
-      itemCount: characters.length + 1,
+      controller: scrollController,
+      itemCount: characters.length + (isLoading ? 2 : 1),
       itemBuilder: (context, index) {
         if (index == 0) {
           final isSearching = searchQuery.isNotEmpty;
@@ -45,13 +50,20 @@ class CharactersListView extends StatelessWidget {
               horizontal: 16.0,
             ),
             child: Text(
-              isSearching ? 'Search Results' : 'Total Characters: 20',
+              isSearching ? 'Search Results' : 'All Characters: 200',
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
               ),
             ),
+          );
+        }
+
+        if (index == characters.length + 1 && isLoading) {
+          return const Padding(
+            padding: EdgeInsets.all(16),
+            child: Center(child: CircularProgressIndicator()),
           );
         }
 

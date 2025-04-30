@@ -8,7 +8,14 @@ class CharactersLoading extends CharactersState {}
 
 class CharactersLoaded extends CharactersState {
   final List<CharactersEntity> characters;
-  CharactersLoaded(this.characters);
+  final bool hasReachedMax;
+  final int currentPage;
+
+  CharactersLoaded(
+    this.characters, {
+    this.hasReachedMax = false,
+    this.currentPage = 1,
+  });
 }
 
 class CharactersError extends CharactersState {

@@ -15,31 +15,59 @@ class CharactersListScreen extends StatefulWidget {
 class _HomeScreenState extends State<CharactersListScreen> {
   List<CharactersEntity> charactersList = [];
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+
   String _searchCharacter = '';
+  int _currentPage = 1;
+  bool _isLoading = false;
+  bool _hasMore = true;
 
   @override
   void initState() {
     super.initState();
-    getAllCharacters();
+    _fetchCharacters();
     _searchController.addListener(() {
       setState(() {
         _searchCharacter = _searchController.text.toLowerCase();
       });
     });
+    _scrollController.addListener(_onScroll);
   }
 
-  Future<void> getAllCharacters() async {
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 200 &&
+        !_isLoading &&
+        _hasMore) {
+      _fetchCharacters();
+    }
+  }
+
+  Future<void> _fetchCharacters() async {
+    setState(() => _isLoading = true);
     final repo = CharactersListRepository();
-    charactersList = await repo.getAllCharacters();
-    setState(() {});
+    final newCharacters = await repo.getAllCharacters(page: _currentPage);
+
+    setState(() {
+      _currentPage++;
+      _isLoading = false;
+      if (newCharacters.isEmpty) {
+        _hasMore = false;
+      } else {
+        charactersList.addAll(newCharacters);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final filteredCharacters =
-        charactersList.where((character) {
-          return character.name.toLowerCase().contains(_searchCharacter);
-        }).toList();
+        charactersList
+            .where(
+              (character) =>
+                  character.name.toLowerCase().contains(_searchCharacter),
+            )
+            .toList();
 
     return Scaffold(
       backgroundColor: const Color(0xff0B1E2D),
@@ -48,6 +76,8 @@ class _HomeScreenState extends State<CharactersListScreen> {
         child: CharactersListView(
           characters: filteredCharacters,
           searchQuery: _searchCharacter,
+          isLoading: _isLoading,
+          scrollController: _scrollController,
         ),
       ),
       bottomNavigationBar: CustomBottomNavigatorBar(),
@@ -57,6 +87,7 @@ class _HomeScreenState extends State<CharactersListScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 }
