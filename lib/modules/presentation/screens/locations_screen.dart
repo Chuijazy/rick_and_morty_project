@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_project/modules/services/rick_and_morty_api.dart';
+import 'package:rick_and_morty_project/modules/core/services/rick_and_morty_api.dart';
 
 class LocationsScreen extends StatefulWidget {
   const LocationsScreen({super.key});

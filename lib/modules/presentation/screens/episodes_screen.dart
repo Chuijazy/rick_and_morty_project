@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_project/modules/services/rick_and_morty_api.dart';
+import 'package:rick_and_morty_project/modules/core/services/rick_and_morty_api.dart';
 
+@RoutePage()
 class EpisodesScreen extends StatefulWidget {
   const EpisodesScreen({super.key});
 

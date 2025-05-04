@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/custom_bottom_navigator_bar.dart';
+import 'package:rick_and_morty_project/modules/core/config/router/router.gr.dart';
 
+@RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -10,12 +12,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Color(0xff0B1E2D),
       body: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CustomBottomNavigatorBar(),
-            ),
-          );
+          context.pushRoute(const CustomBottomNavigatorBarRoute());
         },
         child: Stack(
           children: [

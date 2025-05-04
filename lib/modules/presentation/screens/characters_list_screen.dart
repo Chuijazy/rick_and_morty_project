@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty_project/modules/core/config/router/router.gr.dart';
 import 'package:rick_and_morty_project/modules/data/repository/characters_list_repository.dart';
 import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/filters_screen.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/characters_list_view.dart';
+import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/characters_list_view_screen.dart';
 import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/search_app_bar.dart';
 
+@RoutePage()
 class CharactersListScreen extends StatefulWidget {
   const CharactersListScreen({super.key});
 
@@ -80,21 +82,18 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
   }
 
   void _openFilters() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:
-            (context) => FiltersScreen(
-              selectedStatus: _selectedStatus,
-              selectedGender: _selectedGender,
-            ),
+    final result = await context.pushRoute(
+      FiltersRoute(
+        selectedStatus: _selectedStatus,
+        selectedGender: _selectedGender,
       ),
     );
 
     if (result != null && mounted) {
+      final data = result as Map<String, dynamic>;
       setState(() {
-        _selectedStatus = result['status'];
-        _selectedGender = result['gender'];
+        _selectedStatus = data['status'];
+        _selectedGender = data['gender'];
       });
     }
   }
@@ -131,7 +130,7 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
                 ? _buildNotFoundBySearch()
                 : showNotFoundByFilters
                 ? _buildNotFoundByFilters()
-                : CharactersListView(
+                : CharactersListViewScreen(
                   characters: filteredCharacters,
                   searchQuery: _searchCharacter,
                   isLoading: _isLoading,

@@ -1,9 +1,11 @@
 import 'dart:ui';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
 import 'package:rick_and_morty_project/modules/presentation/screens/characters_info_screen_details/characters_info_item.dart';
 import 'package:rick_and_morty_project/modules/presentation/screens/characters_info_screen_details/episodes_widget.dart';
 
+@RoutePage()
 class CharactersInfoScreen extends StatelessWidget {
   final CharactersEntity character;
 
@@ -126,7 +128,6 @@ class CharactersInfoScreen extends StatelessWidget {
               ],
             ),
           ),
-          // Кнопка назад
           Positioned(
             top: MediaQuery.of(context).padding.top,
             left: 10,
