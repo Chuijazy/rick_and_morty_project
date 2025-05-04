@@ -1,9 +1,7 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_project/modules/core/config/router/router.gr.dart';
 import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
-import 'package:rick_and_morty_project/modules/presentation/screens/characters_info_screen.dart';
 
 @RoutePage()
 class CharactersListViewScreen extends StatelessWidget {
