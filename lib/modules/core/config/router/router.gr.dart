@@ -9,32 +9,32 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:flutter/material.dart' as _i9;
+import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart';
 import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart'
-    as _i10;
+    as _i9;
 import 'package:rick_and_morty_project/modules/presentation/screens/characters_info_screen.dart'
     as _i1;
 import 'package:rick_and_morty_project/modules/presentation/screens/characters_list_screen.dart'
     as _i2;
 import 'package:rick_and_morty_project/modules/presentation/screens/episodes_screen.dart'
-    as _i5;
-import 'package:rick_and_morty_project/modules/presentation/screens/filters_screen.dart'
-    as _i6;
-import 'package:rick_and_morty_project/modules/presentation/screens/home_screen.dart'
-    as _i7;
-import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/characters_list_view_screen.dart'
-    as _i3;
-import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/custom_bottom_navigator_bar_screen.dart'
     as _i4;
+import 'package:rick_and_morty_project/modules/presentation/screens/filters_screen.dart'
+    as _i5;
+import 'package:rick_and_morty_project/modules/presentation/screens/home_screen.dart'
+    as _i6;
+import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/characters_list_view_screen.dart';
+import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/custom_bottom_navigator_bar_screen.dart'
+    as _i3;
 
 /// generated route for
 /// [_i1.CharactersInfoScreen]
-class CharactersInfoRoute extends _i8.PageRouteInfo<CharactersInfoRouteArgs> {
+class CharactersInfoRoute extends _i7.PageRouteInfo<CharactersInfoRouteArgs> {
   CharactersInfoRoute({
-    _i9.Key? key,
-    required _i10.CharactersEntity character,
-    List<_i8.PageRouteInfo>? children,
+    _i8.Key? key,
+    required _i9.CharactersEntity character,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
          CharactersInfoRoute.name,
          args: CharactersInfoRouteArgs(key: key, character: character),
@@ -43,7 +43,7 @@ class CharactersInfoRoute extends _i8.PageRouteInfo<CharactersInfoRouteArgs> {
 
   static const String name = 'CharactersInfoRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CharactersInfoRouteArgs>();
@@ -55,9 +55,9 @@ class CharactersInfoRoute extends _i8.PageRouteInfo<CharactersInfoRouteArgs> {
 class CharactersInfoRouteArgs {
   const CharactersInfoRouteArgs({this.key, required this.character});
 
-  final _i9.Key? key;
+  final _i8.Key? key;
 
-  final _i10.CharactersEntity character;
+  final _i9.CharactersEntity character;
 
   @override
   String toString() {
@@ -67,13 +67,13 @@ class CharactersInfoRouteArgs {
 
 /// generated route for
 /// [_i2.CharactersListScreen]
-class CharactersListRoute extends _i8.PageRouteInfo<void> {
-  const CharactersListRoute({List<_i8.PageRouteInfo>? children})
+class CharactersListRoute extends _i7.PageRouteInfo<void> {
+  const CharactersListRoute({List<_i7.PageRouteInfo>? children})
     : super(CharactersListRoute.name, initialChildren: children);
 
   static const String name = 'CharactersListRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       return const _i2.CharactersListScreen();
@@ -82,16 +82,16 @@ class CharactersListRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.CharactersListViewScreen]
+/// [CharactersListViewScreen]
 class CharactersListViewRoute
-    extends _i8.PageRouteInfo<CharactersListViewRouteArgs> {
+    extends _i7.PageRouteInfo<CharactersListViewRouteArgs> {
   CharactersListViewRoute({
-    _i9.Key? key,
-    required List<_i10.CharactersEntity> characters,
+    Key? key,
+    required List<_i9.CharactersEntity> characters,
     required String searchQuery,
     required bool isLoading,
-    required _i9.ScrollController scrollController,
-    List<_i8.PageRouteInfo>? children,
+    required ScrollController scrollController,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
          CharactersListViewRoute.name,
          args: CharactersListViewRouteArgs(
@@ -106,11 +106,11 @@ class CharactersListViewRoute
 
   static const String name = 'CharactersListViewRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CharactersListViewRouteArgs>();
-      return _i3.CharactersListViewScreen(
+      return CharactersListViewScreen(
         key: args.key,
         characters: args.characters,
         searchQuery: args.searchQuery,
@@ -130,15 +130,15 @@ class CharactersListViewRouteArgs {
     required this.scrollController,
   });
 
-  final _i9.Key? key;
+  final Key? key;
 
-  final List<_i10.CharactersEntity> characters;
+  final List<_i9.CharactersEntity> characters;
 
   final String searchQuery;
 
   final bool isLoading;
 
-  final _i9.ScrollController scrollController;
+  final ScrollController scrollController;
 
   @override
   String toString() {
@@ -147,45 +147,45 @@ class CharactersListViewRouteArgs {
 }
 
 /// generated route for
-/// [_i4.CustomBottomNavigatorBarScreen]
-class CustomBottomNavigatorBarRoute extends _i8.PageRouteInfo<void> {
-  const CustomBottomNavigatorBarRoute({List<_i8.PageRouteInfo>? children})
+/// [_i3.CustomBottomNavigatorBarScreen]
+class CustomBottomNavigatorBarRoute extends _i7.PageRouteInfo<void> {
+  const CustomBottomNavigatorBarRoute({List<_i7.PageRouteInfo>? children})
     : super(CustomBottomNavigatorBarRoute.name, initialChildren: children);
 
   static const String name = 'CustomBottomNavigatorBarRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const _i4.CustomBottomNavigatorBarScreen();
+      return const _i3.CustomBottomNavigatorBarScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i5.EpisodesScreen]
-class EpisodesRoute extends _i8.PageRouteInfo<void> {
-  const EpisodesRoute({List<_i8.PageRouteInfo>? children})
+/// [_i4.EpisodesScreen]
+class EpisodesRoute extends _i7.PageRouteInfo<void> {
+  const EpisodesRoute({List<_i7.PageRouteInfo>? children})
     : super(EpisodesRoute.name, initialChildren: children);
 
   static const String name = 'EpisodesRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const _i5.EpisodesScreen();
+      return const _i4.EpisodesScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i6.FiltersScreen]
-class FiltersRoute extends _i8.PageRouteInfo<FiltersRouteArgs> {
+/// [_i5.FiltersScreen]
+class FiltersRoute extends _i7.PageRouteInfo<FiltersRouteArgs> {
   FiltersRoute({
-    _i9.Key? key,
+    _i8.Key? key,
     String? selectedStatus,
     String? selectedGender,
-    List<_i8.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
          FiltersRoute.name,
          args: FiltersRouteArgs(
@@ -198,13 +198,13 @@ class FiltersRoute extends _i8.PageRouteInfo<FiltersRouteArgs> {
 
   static const String name = 'FiltersRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<FiltersRouteArgs>(
         orElse: () => const FiltersRouteArgs(),
       );
-      return _i6.FiltersScreen(
+      return _i5.FiltersScreen(
         key: args.key,
         selectedStatus: args.selectedStatus,
         selectedGender: args.selectedGender,
@@ -216,7 +216,7 @@ class FiltersRoute extends _i8.PageRouteInfo<FiltersRouteArgs> {
 class FiltersRouteArgs {
   const FiltersRouteArgs({this.key, this.selectedStatus, this.selectedGender});
 
-  final _i9.Key? key;
+  final _i8.Key? key;
 
   final String? selectedStatus;
 
@@ -229,17 +229,17 @@ class FiltersRouteArgs {
 }
 
 /// generated route for
-/// [_i7.HomeScreen]
-class HomeRoute extends _i8.PageRouteInfo<void> {
-  const HomeRoute({List<_i8.PageRouteInfo>? children})
+/// [_i6.HomeScreen]
+class HomeRoute extends _i7.PageRouteInfo<void> {
+  const HomeRoute({List<_i7.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const _i7.HomeScreen();
+      return const _i6.HomeScreen();
     },
   );
 }
