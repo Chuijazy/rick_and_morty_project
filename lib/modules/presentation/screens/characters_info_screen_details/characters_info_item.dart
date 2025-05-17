@@ -19,15 +19,15 @@ class CharactersInfoItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff828282),
+                    color: Color(0xff5B6975),
                   ),
                 ),
                 Text(
                   character.gender,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -39,15 +39,15 @@ class CharactersInfoItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff828282),
+                    color: Color(0xff5B6975),
                   ),
                 ),
                 Text(
                   character.species,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -66,20 +66,20 @@ class CharactersInfoItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff828282),
+                    color: Color(0xff5B6975),
                   ),
                 ),
                 Text(
                   character.originName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                   ),
                 ),
               ],
             ),
-            const Icon(Icons.arrow_forward_ios_rounded),
+            const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white),
           ],
         ),
         const SizedBox(height: 20),
@@ -94,20 +94,20 @@ class CharactersInfoItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xff828282),
+                    color: Color(0xff5B6975),
                   ),
                 ),
                 Text(
                   character.locationName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                   ),
                 ),
               ],
             ),
-            const Icon(Icons.arrow_forward_ios_rounded),
+            const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white),
           ],
         ),
       ],

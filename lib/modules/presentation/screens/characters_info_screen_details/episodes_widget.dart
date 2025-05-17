@@ -59,6 +59,7 @@ class EpisodesWidget extends StatelessWidget {
                                     child: Text(
                                       episode['name'],
                                       style: const TextStyle(
+                                        color: Colors.white,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -66,9 +67,11 @@ class EpisodesWidget extends StatelessWidget {
                                   ),
                                   Text(
                                     episode['air_date'],
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.grey,
+                                      color: Color(
+                                        0xff22A2BDDE,
+                                      ).withOpacity(0.7),
                                     ),
                                   ),
                                 ],

@@ -21,7 +21,7 @@ class CharactersInfoScreen extends StatelessWidget {
             : Colors.red;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xff0B1E2D),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -60,8 +60,7 @@ class CharactersInfoScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
+                                color: const Color(0xff0B1E2D),
                                 width: 5,
                               ),
                               image: DecorationImage(
@@ -88,7 +87,7 @@ class CharactersInfoScreen extends StatelessWidget {
                               character.name,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.white,
                                 fontSize: 28,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -111,6 +110,7 @@ class CharactersInfoScreen extends StatelessWidget {
                               child: Text(
                                 'Episodes:',
                                 style: TextStyle(
+                                  color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                 ),

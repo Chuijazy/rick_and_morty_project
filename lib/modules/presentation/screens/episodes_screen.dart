@@ -22,7 +22,15 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('All Episodes')),
+      backgroundColor: const Color(0xff0B1E2D),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff0B1E2D),
+        title: const Text(
+          'All Episodes',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _episodesFuture,
         builder: (context, snapshot) {
@@ -31,11 +39,21 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
           }
 
           if (snapshot.hasError) {
-            return Center(child: Text('Ошибка: ${snapshot.error}'));
+            return Center(
+              child: Text(
+                'Ошибка: ${snapshot.error}',
+                style: const TextStyle(color: Colors.white),
+              ),
+            );
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Нет доступных эпизодов.'));
+            return const Center(
+              child: Text(
+                'Нет доступных эпизодов.',
+                style: TextStyle(color: Colors.white),
+              ),
+            );
           }
 
           final episodes = snapshot.data!;
@@ -45,9 +63,15 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
             itemBuilder: (context, index) {
               final episode = episodes[index];
               return ListTile(
-                title: Text(episode['name'] ?? 'Без названия'),
-                subtitle: Text(episode['air_date'] ?? 'Без даты'),
-                leading: const Icon(Icons.movie),
+                title: Text(
+                  episode['name'] ?? 'Без названия',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  episode['air_date'] ?? 'Без даты',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                leading: const Icon(Icons.movie, color: Colors.white70),
               );
             },
           );

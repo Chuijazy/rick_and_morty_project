@@ -20,7 +20,15 @@ class _LocationsScreenState extends State<LocationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('All Locations')),
+      backgroundColor: const Color(0xff0B1E2D),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff0B1E2D),
+        title: const Text(
+          'All Locations',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _locationsFuture,
         builder: (context, snapshot) {
@@ -29,11 +37,21 @@ class _LocationsScreenState extends State<LocationsScreen> {
           }
 
           if (snapshot.hasError) {
-            return Center(child: Text('Ошибка: ${snapshot.error}'));
+            return Center(
+              child: Text(
+                'Ошибка: ${snapshot.error}',
+                style: const TextStyle(color: Colors.white),
+              ),
+            );
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Нет доступных локаций.'));
+            return const Center(
+              child: Text(
+                'Нет доступных локаций.',
+                style: TextStyle(color: Colors.white),
+              ),
+            );
           }
 
           final locations = snapshot.data!;
@@ -43,9 +61,15 @@ class _LocationsScreenState extends State<LocationsScreen> {
             itemBuilder: (context, index) {
               final location = locations[index];
               return ListTile(
-                title: Text(location['name'] ?? 'Без названия'),
-                subtitle: Text(location['type'] ?? 'Без типа'),
-                leading: const Icon(Icons.place),
+                title: Text(
+                  location['name'] ?? 'Без названия',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  location['type'] ?? 'Без типа',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                leading: const Icon(Icons.place, color: Colors.white70),
               );
             },
           );

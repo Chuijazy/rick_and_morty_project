@@ -119,7 +119,7 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
         isFiltered;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Color(0xff0B1E2D),
       appBar: SearchAppBar(
         controller: _searchController,
         onFilterTap: _openFilters,
@@ -149,7 +149,7 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
           const SizedBox(height: 20),
           const Text(
             'No characters found with this name',
-            style: TextStyle(fontSize: 18, color: Colors.black54),
+            style: TextStyle(fontSize: 18, color: Color(0xff5B6975)),
             textAlign: TextAlign.center,
           ),
         ],
@@ -166,7 +166,7 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
           const SizedBox(height: 20),
           const Text(
             'No characters found for these filters',
-            style: TextStyle(fontSize: 18, color: Colors.black54),
+            style: TextStyle(fontSize: 18, color: Color(0xff5B6975)),
             textAlign: TextAlign.center,
           ),
         ],

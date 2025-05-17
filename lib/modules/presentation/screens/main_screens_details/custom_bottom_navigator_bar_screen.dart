@@ -28,10 +28,11 @@ class _CustomBottomNavigatorBarState
     return Scaffold(
       body: screens[myIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color(0xff152A3A),
         selectedLabelStyle: const TextStyle(fontSize: 14),
         unselectedLabelStyle: const TextStyle(fontSize: 14),
-        selectedItemColor: const Color(0xff22A2BD),
-        unselectedItemColor: const Color(0xffBDBDBD),
+        selectedItemColor: const Color(0xff43D049),
+        unselectedItemColor: const Color(0xff5B6975),
         type: BottomNavigationBarType.fixed,
         currentIndex: myIndex,
         onTap: (index) {

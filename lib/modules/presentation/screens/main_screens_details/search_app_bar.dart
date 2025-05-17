@@ -9,12 +9,12 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Color(0xff0B1E2D),
       automaticallyImplyLeading: false,
       title: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Color(0xff152A3A),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -24,10 +24,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             Expanded(
               child: TextField(
                 controller: controller,
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyLarge?.color,
-                ),
-
+                style: TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
                   hintText: 'Search character...',
                   hintStyle: TextStyle(color: Color(0xffBDBDBD)),

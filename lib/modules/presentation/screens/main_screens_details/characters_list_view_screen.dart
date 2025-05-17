@@ -104,7 +104,7 @@ class CharactersListViewScreen extends StatelessWidget {
               Text(
                 character.name,
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -112,7 +112,7 @@ class CharactersListViewScreen extends StatelessWidget {
               Text(
                 '${character.species}, ${character.gender}',
                 style: const TextStyle(
-                  color: Color(0xff828282),
+                  color: Color(0xff6E798C),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
