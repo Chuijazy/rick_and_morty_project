@@ -18,3 +18,12 @@ class SearchCharacters extends CharactersEvent {
 
   SearchCharacters(this.query);
 }
+
+abstract class EpisodesEvent {}
+
+class FetchEpisodes extends EpisodesEvent {
+  final int characterId;
+  final int page;
+
+  FetchEpisodes({required this.characterId, this.page = 1});
+}

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty_project/modules/core/services/rick_and_morty_api.dart';
 import 'package:rick_and_morty_project/modules/data/repository/characters_list_repository.dart';
 import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
 import 'package:rick_and_morty_project/modules/presentation/bloc/characters_event.dart';
@@ -101,6 +102,68 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       emit(CharactersEmpty(reason: 'filters'));
     } else {
       emit(CharactersLoaded(characters: filtered, hasMore: _hasMore));
+    }
+  }
+}
+
+class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
+  final RickAndMortyApi api;
+
+  EpisodesBloc(this.api) : super(EpisodesInitial()) {
+    on<FetchEpisodes>(_onFetchEpisodes);
+  }
+
+  int _currentPage = 1;
+  bool _hasMore = true;
+  final List<Map<String, dynamic>> _allEpisodes = [];
+
+  int get currentPage => _currentPage;
+  bool get hasMore => _hasMore;
+
+  Future<void> _onFetchEpisodes(
+    FetchEpisodes event,
+    Emitter<EpisodesState> emit,
+  ) async {
+    if (!_hasMore && event.page != 1) return;
+
+    try {
+      if (event.page == 1) {
+        _allEpisodes.clear();
+        _currentPage = 1;
+        _hasMore = true;
+        emit(EpisodesLoading());
+      }
+
+      final episodeUrls = await api.fetchCharacterEpisodes(event.characterId);
+
+      final pageSize = 10;
+      final start = (event.page - 1) * pageSize;
+      final end =
+          (start + pageSize) > episodeUrls.length
+              ? episodeUrls.length
+              : (start + pageSize);
+      if (start >= episodeUrls.length) {
+        _hasMore = false;
+        emit(
+          EpisodesLoaded(episodes: List.from(_allEpisodes), hasMore: _hasMore),
+        );
+        return;
+      }
+
+      final currentPageUrls = episodeUrls.sublist(start, end);
+
+      final episodesDetails = await api.fetchEpisodeDetails(currentPageUrls);
+
+      _allEpisodes.addAll(episodesDetails);
+
+      _hasMore = end < episodeUrls.length;
+      _currentPage = event.page + 1;
+
+      emit(
+        EpisodesLoaded(episodes: List.from(_allEpisodes), hasMore: _hasMore),
+      );
+    } catch (e) {
+      emit(EpisodesError(message: e.toString()));
     }
   }
 }

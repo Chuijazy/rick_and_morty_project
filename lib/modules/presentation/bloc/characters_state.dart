@@ -24,3 +24,24 @@ class CharactersError extends CharactersState {
 
   CharactersError(String string, {required this.message});
 }
+
+abstract class EpisodesState {}
+
+class EpisodesInitial extends EpisodesState {}
+
+class EpisodesLoading extends EpisodesState {
+  get episodes => null;
+}
+
+class EpisodesLoaded extends EpisodesState {
+  final List<Map<String, dynamic>> episodes;
+  final bool hasMore;
+
+  EpisodesLoaded({required this.episodes, required this.hasMore});
+}
+
+class EpisodesError extends EpisodesState {
+  final String message;
+
+  EpisodesError({required this.message});
+}
