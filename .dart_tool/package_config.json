@@ -39,9 +39,9 @@
     },
     {
       "name": "bloc",
-      "rootUri": "file:///Users/cujzazyabdyldaeva/.pub-cache/hosted/pub.dev/bloc-8.1.4",
+      "rootUri": "file:///Users/cujzazyabdyldaeva/.pub-cache/hosted/pub.dev/bloc-9.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "boolean_selector",
@@ -195,9 +195,9 @@
     },
     {
       "name": "flutter_bloc",
-      "rootUri": "file:///Users/cujzazyabdyldaeva/.pub-cache/hosted/pub.dev/flutter_bloc-8.1.6",
+      "rootUri": "file:///Users/cujzazyabdyldaeva/.pub-cache/hosted/pub.dev/flutter_bloc-9.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "flutter_lints",
@@ -500,7 +500,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-05-04T18:38:07.683445Z",
+  "generated": "2025-05-17T20:42:52.584920Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///Users/cujzazyabdyldaeva/Documents/flutter",

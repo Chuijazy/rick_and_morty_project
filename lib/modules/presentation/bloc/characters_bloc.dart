@@ -1,60 +1,106 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty_project/modules/data/repository/characters_list_repository.dart';
+import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
 import 'package:rick_and_morty_project/modules/presentation/bloc/characters_event.dart';
 import 'package:rick_and_morty_project/modules/presentation/bloc/characters_state.dart';
 
 class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   final CharactersListRepository repository;
+  List<CharactersEntity> _allCharacters = [];
+  int _currentPage = 1;
+  bool _hasMore = true;
 
   CharactersBloc(this.repository) : super(CharactersInitial()) {
-    on<LoadCharacters>(_onLoadCharacters);
-    on<LoadMoreCharacters>(_onLoadMoreCharacters);
+    on<FetchCharacters>(_onFetchCharacters);
+    on<FilterCharacters>(_onFilterCharacters);
+    on<SearchCharacters>(_onSearchCharacters);
   }
 
-  Future<void> _onLoadCharacters(
-    LoadCharacters event,
+  Future<void> _onFetchCharacters(
+    FetchCharacters event,
     Emitter<CharactersState> emit,
   ) async {
-    emit(CharactersLoading());
+    if (!_hasMore) return;
+
     try {
-      final characters = await repository.getAllCharacters(page: 1);
-      emit(CharactersLoaded(characters, currentPage: 1));
+      if (_currentPage == 1) emit(CharactersLoading());
+      final newCharacters = await repository.getAllCharacters(
+        page: _currentPage,
+      );
+      if (newCharacters.isEmpty) {
+        _hasMore = false;
+        if (_allCharacters.isEmpty) {
+          emit(CharactersEmpty(reason: 'initial'));
+        }
+      } else {
+        _allCharacters.addAll(newCharacters);
+        _currentPage++;
+        emit(
+          CharactersLoaded(
+            characters: List.from(_allCharacters),
+            hasMore: _hasMore,
+          ),
+        );
+      }
     } catch (e) {
-      emit(CharactersError('Error loading characters: $e'));
+      emit(CharactersError(e.toString(), message: ''));
     }
   }
 
-  Future<void> _onLoadMoreCharacters(
-    LoadMoreCharacters event,
+  void _onSearchCharacters(
+    SearchCharacters event,
     Emitter<CharactersState> emit,
-  ) async {
-    if (state is CharactersLoaded) {
-      final currentState = state as CharactersLoaded;
-      final nextPage = currentState.currentPage + 1;
+  ) {
+    if (event.query.isEmpty) {
+      emit(
+        CharactersLoaded(
+          characters: List.from(_allCharacters),
+          hasMore: _hasMore,
+        ),
+      );
+      return;
+    }
 
-      try {
-        final newCharacters = await repository.getAllCharacters(page: nextPage);
+    final searched =
+        _allCharacters
+            .where(
+              (char) =>
+                  char.name.toLowerCase().contains(event.query.toLowerCase()),
+            )
+            .toList();
 
-        if (newCharacters.isEmpty) {
-          emit(
-            CharactersLoaded(
-              currentState.characters,
-              hasReachedMax: true,
-              currentPage: currentState.currentPage,
-            ),
-          );
-        } else {
-          emit(
-            CharactersLoaded(
-              [...currentState.characters, ...newCharacters],
-              hasReachedMax: false,
-              currentPage: nextPage,
-            ),
-          );
-        }
-      } catch (e) {
-        emit(CharactersError('Error loading more characters: $e'));
-      }
+    if (searched.isEmpty) {
+      emit(CharactersEmpty(reason: 'search'));
+    } else {
+      emit(CharactersLoaded(characters: searched, hasMore: _hasMore));
+    }
+  }
+
+  void _onFilterCharacters(
+    FilterCharacters event,
+    Emitter<CharactersState> emit,
+  ) {
+    final filtered =
+        _allCharacters.where((char) {
+          final matchesStatus =
+              event.status == null ||
+              char.status.toLowerCase() == event.status!.toLowerCase();
+
+          final matchesGender =
+              event.genders == null || event.genders!.isEmpty
+                  ? true
+                  : event.genders!.any(
+                    (gender) =>
+                        gender.toLowerCase() == char.gender.toLowerCase(),
+                  );
+
+          return matchesStatus && matchesGender;
+        }).toList();
+
+    if (filtered.isEmpty) {
+      emit(CharactersEmpty(reason: 'filters'));
+    } else {
+      emit(CharactersLoaded(characters: filtered, hasMore: _hasMore));
     }
   }
 }

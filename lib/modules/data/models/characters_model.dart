@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
 
 class CharactersModel extends CharactersEntity {

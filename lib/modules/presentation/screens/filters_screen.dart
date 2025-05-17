@@ -83,10 +83,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 onPressed: () {
                   Navigator.pop(context, {
                     'status': _status,
-                    'gender':
-                        _selectedGenders.isNotEmpty
-                            ? _selectedGenders.first
-                            : null,
+                    'genders': _selectedGenders.toList(),
                   });
                 },
                 child: const Text(

@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty_project/modules/core/config/router/router.gr.dart';
-import 'package:rick_and_morty_project/modules/data/repository/characters_list_repository.dart';
-import 'package:rick_and_morty_project/modules/domain/entities/characters_entity.dart';
+import 'package:rick_and_morty_project/modules/presentation/bloc/characters_bloc.dart';
+import 'package:rick_and_morty_project/modules/presentation/bloc/characters_event.dart';
+import 'package:rick_and_morty_project/modules/presentation/bloc/characters_state.dart';
 import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/characters_list_view_screen.dart';
 import 'package:rick_and_morty_project/modules/presentation/screens/main_screens_details/search_app_bar.dart';
 
@@ -18,67 +20,26 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-  List<CharactersEntity> charactersList = [];
-  String _searchCharacter = '';
   String? _selectedStatus;
   String? _selectedGender;
-
-  int _currentPage = 1;
-  bool _isLoading = false;
-  bool _hasMore = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchCharacters();
+    context.read<CharactersBloc>().add(FetchCharacters());
 
-    _searchController.addListener(() {
-      setState(() {
-        _searchCharacter = _searchController.text.toLowerCase();
-      });
-    });
-
-    _scrollController.addListener(_onScroll);
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 200 &&
-        !_isLoading &&
-        _hasMore) {
-      _fetchCharacters();
-    }
-  }
-
-  Future<void> _fetchCharacters() async {
-    setState(() => _isLoading = true);
-    final repo = CharactersListRepository();
-    final newCharacters = await repo.getAllCharacters(page: _currentPage);
-
-    setState(() {
-      _currentPage++;
-      _isLoading = false;
-      if (newCharacters.isEmpty) {
-        _hasMore = false;
-      } else {
-        charactersList.addAll(newCharacters);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
+        context.read<CharactersBloc>().add(FetchCharacters());
       }
     });
-  }
 
-  List<CharactersEntity> _applyFilters() {
-    return charactersList.where((character) {
-      final matchesName = character.name.toLowerCase().contains(
-        _searchCharacter,
+    _searchController.addListener(() {
+      context.read<CharactersBloc>().add(
+        SearchCharacters(_searchController.text),
       );
-      final matchesStatus =
-          _selectedStatus == null ||
-          character.status.toLowerCase() == _selectedStatus!.toLowerCase();
-      final matchesGender =
-          _selectedGender == null ||
-          character.gender.toLowerCase() == _selectedGender!.toLowerCase();
-      return matchesName && matchesStatus && matchesGender;
-    }).toList();
+    });
   }
 
   void _openFilters() async {
@@ -91,51 +52,52 @@ class _CharactersListScreenState extends State<CharactersListScreen> {
 
     if (result != null && mounted) {
       final data = result as Map<String, dynamic>;
-      setState(() {
-        _selectedStatus = data['status'];
-        _selectedGender = data['gender'];
-      });
+      _selectedStatus = data['status'];
+      _selectedGender = null;
+      final List<String>? selectedGenders =
+          (data['genders'] as List<dynamic>?)?.cast<String>();
+
+      context.read<CharactersBloc>().add(
+        FilterCharacters(status: _selectedStatus, genders: selectedGenders),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final filteredCharacters = _applyFilters();
-
-    final bool isFiltered = _selectedStatus != null || _selectedGender != null;
-    final bool isSearchActive = _searchCharacter.isNotEmpty;
-
-    final bool showNotFoundBySearch =
-        !_isLoading &&
-        charactersList.isNotEmpty &&
-        filteredCharacters.isEmpty &&
-        isSearchActive &&
-        !isFiltered;
-
-    final bool showNotFoundByFilters =
-        !_isLoading &&
-        charactersList.isNotEmpty &&
-        filteredCharacters.isEmpty &&
-        isFiltered;
-
     return Scaffold(
-      backgroundColor: Color(0xff0B1E2D),
+      backgroundColor: const Color(0xff0B1E2D),
       appBar: SearchAppBar(
         controller: _searchController,
         onFilterTap: _openFilters,
       ),
-      body: SafeArea(
-        child:
-            showNotFoundBySearch
-                ? _buildNotFoundBySearch()
-                : showNotFoundByFilters
-                ? _buildNotFoundByFilters()
-                : CharactersListViewScreen(
-                  characters: filteredCharacters,
-                  searchQuery: _searchCharacter,
-                  isLoading: _isLoading,
-                  scrollController: _scrollController,
-                ),
+      body: BlocBuilder<CharactersBloc, CharactersState>(
+        builder: (context, state) {
+          if (state is CharactersLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is CharactersLoaded) {
+            return CharactersListViewScreen(
+              characters: state.characters,
+              scrollController: _scrollController,
+              isLoading: state.hasMore,
+              searchQuery: _searchController.text,
+            );
+          } else if (state is CharactersEmpty) {
+            if (state.reason == 'filters') {
+              return _buildNotFoundByFilters();
+            } else {
+              return _buildNotFoundBySearch();
+            }
+          } else if (state is CharactersError) {
+            return Center(
+              child: Text(
+                state.message,
+                style: const TextStyle(color: Colors.red),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
+        },
       ),
     );
   }

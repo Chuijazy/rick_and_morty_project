@@ -8,7 +8,15 @@ import 'package:rick_and_morty_project/modules/presentation/bloc/characters_even
 final appRouter = AppRouter();
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create:
+          (context) =>
+              CharactersBloc(CharactersListRepository())
+                ..add(FetchCharacters()),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,15 +24,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (_) =>
-              CharactersBloc(CharactersListRepository())..add(LoadCharacters()),
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Rick and Morty',
-        routerConfig: appRouter.config(),
-      ),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'Rick and Morty',
+      routerConfig: appRouter.config(),
     );
   }
 }

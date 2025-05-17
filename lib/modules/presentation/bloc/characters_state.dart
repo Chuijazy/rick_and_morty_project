@@ -8,17 +8,19 @@ class CharactersLoading extends CharactersState {}
 
 class CharactersLoaded extends CharactersState {
   final List<CharactersEntity> characters;
-  final bool hasReachedMax;
-  final int currentPage;
+  final bool hasMore;
 
-  CharactersLoaded(
-    this.characters, {
-    this.hasReachedMax = false,
-    this.currentPage = 1,
-  });
+  CharactersLoaded({required this.characters, required this.hasMore});
+}
+
+class CharactersEmpty extends CharactersState {
+  final String reason;
+
+  CharactersEmpty({required this.reason});
 }
 
 class CharactersError extends CharactersState {
   final String message;
-  CharactersError(this.message);
+
+  CharactersError(String string, {required this.message});
 }
