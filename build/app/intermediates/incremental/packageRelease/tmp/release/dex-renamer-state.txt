@@ -1,4 +1,4 @@
-#Fri May 09 00:42:18 KGT 2025
+#Wed May 21 18:14:39 KGT 2025
 base.0=/Users/cujzazyabdyldaeva/Documents/GitHub/rick_and_morty_project/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
